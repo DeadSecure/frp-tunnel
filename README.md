@@ -10,12 +10,8 @@ wget -4 -N https://github.com/opiran-club/frp-tunnel/blob/main/frp-installer && 
 ```
 
 ## Image Of Script
-<details>
- <summary><p><b> 👉 Click To View 👉 </b></p></summary>
   
 ![image](https://github.com/opiran-club/frp-tunnel/assets/130220895/44bd67b5-ac20-4694-9012-fd614226642a)
-
-</details>
 
 #
 #
