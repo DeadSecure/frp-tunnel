@@ -1,6 +1,51 @@
+## setup FRP Tunnel on client and server using docker and docker-compose
 
+  
+---------------------------------------------------------------------------------------------------------------------------------------
 
+###  ‼️ INSTRUCTION ‼️
 
 ```
-wget -4 -N https://github.com/opiran-club/proxy/blob/main/ipv6-installer.sh && chmod +x ipv6-installer.sh && ./ipv6-installer.sh
+wget -4 -N https://github.com/opiran-club/frp-tunnel/blob/main/frp-installer && chmod +x frp-installer && ./frp-installer
 ```
+
+## Image Of Script
+<details>
+ <summary><p><b> 👉 Click To View 👉 </b></p></summary>
+  
+![image](https://github.com/opiran-club/frp-tunnel/assets/130220895/44bd67b5-ac20-4694-9012-fd614226642a)
+
+</details>
+
+#
+#
+#
+
+#### 🎁 Donate OPIran 🎁
+
+<details>
+ 
+<summary><p><b> 👉 Click To View <b>⚡️ 🎁 Donate to give away great projects 🎁</b></b></p></summary>
+ 
+ ✅ USDT (ERC20)
+
+🔗 Link : 
+ ```
+
+ ```
+ 
+ ✅ TRX (TRC20)
+🔗 Link : 
+ ```
+
+ ```
+</details>
+
+
+## Credits
+
+credited by [OPIran](https://github.com/opiran-club)
+#
+## Contacts
+
+[Telegram-Group](https://t,me/OPIranCluB)
