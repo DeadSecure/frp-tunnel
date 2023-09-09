@@ -9,6 +9,11 @@
 wget -4 -N https://github.com/opiran-club/frp-tunnel/blob/main/frp-installer && chmod +x frp-installer && ./frp-installer
 ```
 
+The address of console: http://localhost:client_port
+ - username of console: name
+ - password of console: token
+
+   
 ## Image Of Script
   
 ![image](https://github.com/opiran-club/frp-tunnel/assets/130220895/44bd67b5-ac20-4694-9012-fd614226642a)
