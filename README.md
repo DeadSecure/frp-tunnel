@@ -13,6 +13,8 @@ wget -4 -N https://github.com/opiran-club/frp-tunnel/blob/main/frp-installer && 
   
 ![image](https://github.com/opiran-club/frp-tunnel/assets/130220895/44bd67b5-ac20-4694-9012-fd614226642a)
 
+![image](https://github.com/opiran-club/frp-tunnel/assets/130220895/c099fd34-18ef-499b-99c1-3ebb45916a95)
+
 #
 #
 #
