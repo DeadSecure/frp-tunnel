@@ -6,7 +6,7 @@
 ###  ‼️ INSTRUCTION ‼️
 
 ```
-wget -N -4 https://raw.githubusercontent.com/opiran-club/frp-tunnel/main/frp-installer.sh && bash frp-installer.sh
+bash <(curl -Ls https://raw.githubusercontent.com/opiran-club/frp-tunnel/main/frp-installer.sh --ipv4)
 ```
 
 ### at the end after running client frp
