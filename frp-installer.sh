@@ -1,5 +1,4 @@
 #!/bin/bash
-
 CYAN="\e[36m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
