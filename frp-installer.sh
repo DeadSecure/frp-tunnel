@@ -1,5 +1,4 @@
 #!/bin/bash
-
 CYAN="\e[36m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
@@ -8,7 +7,6 @@ BLUE="\e[34m"
 MAGENTA="\e[35m"
 NC="\e[0m"
 
-# Function to continue after pressing Enter
 press_enter() {
     echo -e "\n ${RED}Press Enter to continue... ${NC}"
     read
@@ -23,14 +21,10 @@ uninstall_frp() {
     else
         echo -e "${RED}FRP client directory does not exist.${NC}"
     fi
-
-    # Remove FRP directory
     rm -rf "./frp_0.51.3_linux_amd64"
-
     echo -e "${GREEN}FRP has been uninstalled.${NC}"
 }
 
-# Function to display FRP configuration
 display_frp_config() {
     echo -e "${YELLOW}Displaying FRP Configuration...${NC}"
     if [ -f "./frps/frps.ini" ]; then
@@ -44,7 +38,6 @@ display_frp_config() {
     fi
 }
 
-# Check if script is being run as root
 if [ "$EUID" -ne 0 ]; then
     echo "This script must be run as root."
     exit 1
@@ -72,7 +65,6 @@ yt_title="youtube.com/@opiran-inistitute"
     echo ""
     echo -e "${RED}0. ${CYAN}Exit${NC}"
     echo ""
-    
     echo -ne "${YELLOW}Enter your choice: ${NC}"
     read choice
     
@@ -98,7 +90,6 @@ elif [[ -z "$port_choice" ]]; then
 else
     port=$port_choice
 fi
-
 echo ""
 echo -ne "${YELLOW}Port for the HTTP service? ${RED}[Press enter for default port of 80] ${YELLOW}[or enter a port]: "
 read http_choice
@@ -108,27 +99,22 @@ if [[ -z "$http_choice" ]]; then
 else
     http=$http_choice
 fi
-
 echo ""
 echo -ne "${YELLOW}Port for the HTTPS service? ${RED}[Press enter for default port of 443] ${YELLOW}[or enter a port]: "
 read https_choice
- 
 if [[ -z "$https_choice" ]]; then
     https=443
 else
     https=$https_choice
 fi
-
 echo ""
 echo -ne "${YELLOW}Generate a random token or enter a password for the frps service? ${RED}[Press enter to generate a random token] ${YELLOW}or enter a password: "
 read token_choice
- 
 if [[ -z "$token_choice" ]]; then
     token=$(openssl rand -hex 16)
 else
     token=$token_choice
 fi
-
 if [ ! -d "./frps/tmp" ]; then
     mkdir -p "./frps/tmp"
 else
@@ -155,7 +141,6 @@ max_pool_count = 5
 max_ports_per_client = 0
 tls_only = false
 EOF
-
 cat >> "./frps/docker-compose.yml" << EOF
 version: '3'
 services:
@@ -168,11 +153,8 @@ services:
             - "$PWD/frps/frps.ini:/etc/frp/frps.ini"
             - "$PWD/frps/tmp:/tmp:rw"
 EOF
- 
 echo -e "${YELLOW}Starting FRP server...${NC}"
 docker-compose -f "./frps/docker-compose.yml" up -d
-
-# Sleep for a few seconds to allow the containers to start
 sleep 3
 
 if [ -f "./frps/tmp/frps.log" ]; then
@@ -181,7 +163,6 @@ if [ -f "./frps/tmp/frps.log" ]; then
 else
     echo -e "${RED}Error: FRP server failed to start. Log file not found.${NC}"
 fi
-
 echo -e "\033[1;32mServer IP Address:\033[0m $(curl -s ifconfig.co)"
 echo -e "\033[1;32mService Port:\033[0m $port"
 echo -e "\033[1;32mToken:\033[0m $token"
@@ -189,7 +170,6 @@ echo -e "\033[1;32mHTTP Port:\033[0m $http"
 echo -e "\033[1;32mHTTPS Port:\033[0m $https"
 press_enter
             ;;
-
         2)
 if ! command -v docker &> /dev/null
 then
@@ -202,11 +182,9 @@ if [ -z "$port" ]
 then
     port=7000
 else
-    read -p "Enter the FRP(S) Service port: " port
+    read -p "Enter the FRP(S) Service port:  " port
 fi
- 
-read -p "Enter the FRP(S) Service token: " token
- 
+read -p "Enter the FRP(S) Service token:  " token
 read -p "Enter the port of FRP(C) admin console (press Enter for default **7400** or manual to input a port): " cport
 if [ -z "$cport" ]
 then
@@ -214,7 +192,6 @@ then
 else
     read -p "Enter the FRP(C) admin console port: " cport
 fi
- 
 read -p "Enter the username of FRP(C) console (press Enter for default **admin** or manual to input a name): " cname
 if [ -z "$cname" ]
 then
@@ -222,10 +199,8 @@ then
 else
     read -p "Enter the username of FRP(C) console: " cname
 fi
- 
 echo "Would you like to generate a Random Console Password (Press Enter) or enter a password for the FRP(C) console?"
 read cpasswd
- 
 if  -z $cpasswd ; then
     ctoken=$(openssl rand -hex 12)
 else
@@ -250,7 +225,6 @@ admin_port = $cport
 admin_user = $cname
 admin_pwd = $ctoken
 EOF
- 
 cat >> frpc/docker-compose.yml << EOF
 version: '3'
 services:
@@ -263,12 +237,9 @@ services:
             - ./frpc.ini:/etc/frp/frpc.ini
             - ./tmp:/tmp:rw
 EOF
- 
 docker-compose -f ./frpc/docker-compose.yml up -d
- 
 sleep 3
 sudo cat ./frpc/tmp/frpc.log
- 
 echo -e "Please use below information to Login console and setup your FRP(C) services"
 echo -e "The address of console: \033[1;32mhttp://localhost:$cport\033[0m"
 echo -e "The username of console: \033[1;32m$cname\033[0m"
