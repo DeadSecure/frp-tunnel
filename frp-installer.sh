@@ -6,16 +6,12 @@ RED="\e[31m"
 BLUE="\e[34m"
 MAGENTA="\e[35m"
 NC="\e[0m"
-
 press_enter() {
     echo -e "\n ${RED}Press Enter to continue... ${NC}"
     read
 }
-
 uninstall_frp() {
     echo -e "${YELLOW}Uninstalling FRP...${NC}"
-
-    # Stop and remove FRP Docker containers
     if [ -d "./frpc" ]; then
         docker-compose -f "./frpc/docker-compose.yml" down
     else
@@ -24,25 +20,21 @@ uninstall_frp() {
     rm -rf "./frp_0.51.3_linux_amd64"
     echo -e "${GREEN}FRP has been uninstalled.${NC}"
 }
-
 display_frp_config() {
     echo -e "${YELLOW}Displaying FRP Configuration...${NC}"
     if [ -f "./frps/frps.ini" ]; then
         echo -e "${GREEN}FRP Server Configuration:${NC}"
         cat "./frps/frps.ini"
     fi
-
     if [ -f "./frpc/frpc.ini" ]; then
         echo -e "${GREEN}FRP Client Configuration:${NC}"
         cat "./frpc/frpc.ini"
     fi
 }
-
 if [ "$EUID" -ne 0 ]; then
     echo "This script must be run as root."
     exit 1
 fi
-
 while true; do
 clear
 title_text="OPIran FRP Tunnel"
@@ -67,11 +59,8 @@ yt_title="youtube.com/@opiran-inistitute"
     echo ""
     echo -ne "${YELLOW}Enter your choice: ${NC}"
     read choice
-    
     case $choice in
- 
         1)
-
 if ! command -v docker &> /dev/null
 then
  echo ""
@@ -82,7 +71,6 @@ fi
 echo ""
 echo -ne "${YELLOW}Port for the frps service? ${RED}[Enter blank for default port : 7000] ${GREEN}[Enter 'r' to generate a random port] ${YELLOW}[or enter a port]: "
 read port_choice
- 
 if [[ "$port_choice" == "r" ]]; then
     port=$(shuf -i 7001-9000 -n 1)
 elif [[ -z "$port_choice" ]]; then
@@ -93,7 +81,6 @@ fi
 echo ""
 echo -ne "${YELLOW}Port for the HTTP service? ${RED}[Press enter for default port of 80] ${YELLOW}[or enter a port]: "
 read http_choice
- 
 if [[ -z "$http_choice" ]]; then
     http=80
 else
