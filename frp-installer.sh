@@ -290,5 +290,5 @@ press_enter
         *)
             echo -e "${RED}Invalid choice. Please enter a valid option.${NC}"
             ;;
-    esac
+   esac
 done
